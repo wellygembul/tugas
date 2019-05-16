@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)https://belajarphp.net/membuat-grafik-dengan-php-mysql-chartjs/ -->
+<html lang="en-US" prefix="og: http://ogp.me/ns#" class="no-js js_active  vc_desktop  vc_transform  vc_transform"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://belajarphp.net/xmlrpc.php">
+    <title>Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS</title>
+
+<!-- This site is optimized with the Yoast SEO plugin v9.4 - https://yoast.com/wordpress/plugins/seo/ -->
+<link rel="canonical" href="https://belajarphp.net/membuat-grafik-dengan-php-mysql-chartjs/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Membuat Grafik Dengan PHP MySQL Dan ChartJS">
+<meta property="og:description" content="ChartJS adalah salah satu library yang memanfaatkan element canvas untuk membuat grafik yang akan ditampilkan melalui web browser, kita bisa memanfaatkan library ChartJS untuk menampilkan informasi laporan dalam bentuk grafik sehingga lebih mudah dipahami oleh orang lain dari pada menampilkan data dalam bentuk tabel">
+<meta property="og:url" content="https://belajarphp.net/membuat-grafik-dengan-php-mysql-chartjs/">
+<meta property="og:site_name" content="Belajarphp">
+<meta property="article:section" content="Tips Dan Trik">
+<meta property="article:published_time" content="2016-10-28T00:39:20+00:00">
+<meta property="article:modified_time" content="2018-12-18T21:45:16+00:00">
+<meta property="og:updated_time" content="2018-12-18T21:45:16+00:00">
+<meta property="og:image" content="https://belajarphp.net/wp-content/uploads/2016/10/587500_675d_2.jpg">
+<meta property="og:image:secure_url" content="https://belajarphp.net/wp-content/uploads/2016/10/587500_675d_2.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="ChartJS adalah salah satu library yang memanfaatkan element canvas untuk membuat grafik yang akan ditampilkan melalui web browser, kita bisa memanfaatkan library ChartJS untuk menampilkan informasi laporan dalam bentuk grafik sehingga lebih mudah dipahami oleh orang lain dari pada menampilkan data dalam bentuk tabel. ChartJS sendiri mendukung 6 jenis chart sebagai berikut : Tipe 1 […]">
+<meta name="twitter:title" content="Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS">
+<meta name="twitter:image" content="https://belajarphp.net/wp-content/uploads/2016/10/587500_675d_2.jpg">
+<!-- / Yoast SEO plugin. -->
+
+<link rel="dns-prefetch" href="https://js.stripe.com/">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Belajarphp » Feed" href="https://belajarphp.net/feed/">
+<link rel="alternate" type="application/rss+xml" title="Belajarphp » Comments Feed" href="https://belajarphp.net/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Belajarphp » Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS Comments Feed" href="https://belajarphp.net/membuat-grafik-dengan-php-mysql-chartjs/feed/">
+<!-- This site uses the Google Analytics by MonsterInsights plugin v7.3.3 - Using Analytics tracking - https://www.monsterinsights.com/ -->
+<script type="text/javascript" async="" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/analytics.js.download"></script><script src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/cb=gapi.loaded_1" async=""></script><script src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/cb=gapi(1).loaded_0" async=""></script><script type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/p.js.download" async=""></script><script id="facebook-jssdk" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.4"></script><script type="text/javascript" id="async-buttons" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/async-buttons.js.download"></script><script type="text/javascript" async="" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/linkid.js.download"></script><script async="" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/analytics.js.download"></script><script type="text/javascript" data-cfasync="false">
+	var mi_version         = '7.3.3';
+	var mi_track_user      = true;
+	var mi_no_track_reason = '';
+	
+	var disableStr = 'ga-disable-UA-37262615-2';
+
+	/* Function to detect opted out users */
+	function __gaTrackerIsOptedOut() {
+		return document.cookie.indexOf(disableStr + '=true') > -1;
+	}
+
+	/* Disable tracking if the opt-out cookie exists. */
+	if ( __gaTrackerIsOptedOut() ) {
+		window[disableStr] = true;
+	}
+
+	/* Opt-out function */
+	function __gaTrackerOptout() {
+	  document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+	  window[disableStr] = true;
+	}
+	
+	if ( mi_track_user ) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+		__gaTracker('create', 'UA-37262615-2', 'auto');
+		__gaTracker('set', 'forceSSL', true);
+		__gaTracker('require', 'displayfeatures');
+		__gaTracker('require', 'linkid', 'linkid.js');
+		__gaTracker('send','pageview');
+	} else {
+		console.log( "" );
+		(function() {
+			/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+			var noopfn = function() {
+				return null;
+			};
+			var noopnullfn = function() {
+				return null;
+			};
+			var Tracker = function() {
+				return null;
+			};
+			var p = Tracker.prototype;
+			p.get = noopfn;
+			p.set = noopfn;
+			p.send = noopfn;
+			var __gaTracker = function() {
+				var len = arguments.length;
+				if ( len === 0 ) {
+					return;
+				}
+				var f = arguments[len-1];
+				if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+					console.log( 'Not running function __gaTracker(' + arguments[0] + " ....) because you are not being tracked. " + mi_no_track_reason );
+					return;
+				}
+				try {
+					f.hitCallback();
+				} catch (ex) {
+
+				}
+			};
+			__gaTracker.create = function() {
+				return new Tracker();
+			};
+			__gaTracker.getByName = noopnullfn;
+			__gaTracker.getAll = function() {
+				return [];
+			};
+			__gaTracker.remove = noopfn;
+			window['__gaTracker'] = __gaTracker;
+					})();
+		}
+</script>
+<!-- / Google Analytics by MonsterInsights -->
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/belajarphp.net\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.10"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/wp-emoji-release.min.js.download" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="crayon-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/crayon.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="crayon-theme-classic-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/classic.css" type="text/css" media="all">
+<link rel="stylesheet" id="crayon-font-monaco-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/monaco.css" type="text/css" media="all">
+<link rel="stylesheet" id="cfblbcss-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/cardozafacebook.css" type="text/css" media="all">
+<link rel="stylesheet" id="linear-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/linear.css" type="text/css" media="all">
+<link rel="stylesheet" id="linear-icons-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/linear-icons.css" type="text/css" media="all">
+<link rel="stylesheet" id="stm_lms_icons-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="font-awesome-min-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/font-awesome.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="font-icomoon-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/icomoon.fonts.css" type="text/css" media="all">
+<link rel="stylesheet" id="boostrap-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/bootstrap.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="masterstudy-lms-learning-management-system-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/stm_lms.css" type="text/css" media="all">
+<link rel="stylesheet" id="rs-plugin-settings-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/settings.css" type="text/css" media="all">
+<style id="rs-plugin-settings-inline-css" type="text/css">
+#rs-demo-id {}
+</style>
+<link rel="stylesheet" id="whatsapp-chat-style-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/style(1).css" type="text/css" media="all">
+<link rel="stylesheet" id="stm-gdpr-styles-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/styles.css" type="text/css" media="all">
+<link rel="stylesheet" id="select2-min-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/select2.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="theme-style-less-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/styles(1).css" type="text/css" media="all">
+<link rel="stylesheet" id="fancyboxcss-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/jquery.fancybox.css" type="text/css" media="all">
+<link rel="stylesheet" id="animate.css-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/animate.css" type="text/css" media="all">
+<link rel="stylesheet" id="stm-layout_styles-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/classic_lms.css" type="text/css" media="all">
+<link rel="stylesheet" id="theme-style-animation-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/animation.css" type="text/css" media="all">
+<link rel="stylesheet" id="stm-headers-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/header_default.css" type="text/css" media="all">
+<link rel="stylesheet" id="stm-headers_transparent-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/header_default_transparent.css" type="text/css" media="all">
+<link rel="stylesheet" id="theme-style-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/style(2).css" type="text/css" media="all">
+<style id="theme-style-inline-css" type="text/css">
+                    .sidebar-area .widget_title h3 {
+    font-size: 18px !important;
+}
+
+.stm_post_info .post_title {
+    font-size: 32px !important;
+}
+
+.blog_layout_grid .post_list_item_title
+{
+    font-size: 18px !important;
+}
+
+
+
+body .header_2_top_bar__inner ul.header-menu li a {
+    color: #fff; !important;
+}                 .sidebar-area .widget_title h3 { font-size: 18px !important; } .stm_post_info .post_title { font-size: 32px !important; } .blog_layout_grid .post_list_item_title { font-size: 18px !important; } body .header_2_top_bar__inner ul.header-menu li a { color: #fff; !important; } 
+</style>
+<link rel="stylesheet" id="stm_custom_styles-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/custom_styles.css" type="text/css" media="all">
+<link crossorigin="anonymous" rel="stylesheet" id="redux-google-fonts-stm_option-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/css" type="text/css" media="all">
+<script type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/jquery.js.download"></script>
+<script type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/jquery-migrate.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"https:\/\/belajarphp.net\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/crayon.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","is_debug_mode":"false","download_extensions":"doc,exe,js,pdf,ppt,tgz,zip,xls","inbound_paths":"","home_url":"https:\/\/belajarphp.net","track_download_as":"event","internal_label":"int","hash_tracking":"false"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/frontend.min.js.download"></script>
+<script type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/cardozafacebook.js.download"></script>
+<script type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/saved_resource(2)"></script>
+<script type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/lms.js.download"></script>
+<script type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/jquery.themepunch.tools.min.js.download"></script>
+<script type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/jquery.themepunch.revolution.min.js.download"></script>
+<link rel="https://api.w.org/" href="https://belajarphp.net/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://belajarphp.net/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://belajarphp.net/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 4.9.10">
+<link rel="shortlink" href="https://belajarphp.net/?p=2742">
+<link rel="alternate" type="application/json+oembed" href="https://belajarphp.net/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fbelajarphp.net%2Fmembuat-grafik-dengan-php-mysql-chartjs%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://belajarphp.net/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fbelajarphp.net%2Fmembuat-grafik-dengan-php-mysql-chartjs%2F&amp;format=xml">
+	<script type="text/javascript">
+        var stm_lms_ajaxurl = 'https://belajarphp.net/wp-admin/admin-ajax.php';
+	</script>
+	<script type="text/javascript">
+	window._wp_rp_static_base_url = 'https://wprp.sovrn.com/static/';
+	window._wp_rp_wp_ajax_url = "https://belajarphp.net/wp-admin/admin-ajax.php";
+	window._wp_rp_plugin_version = '3.6.4';
+	window._wp_rp_post_id = '2742';
+	window._wp_rp_num_rel_posts = '5';
+	window._wp_rp_thumbnails = true;
+	window._wp_rp_post_title = 'Tutorial+Membuat+Grafik+Dengan+PHP+MySQL+Dan+ChartJS';
+	window._wp_rp_post_tags = ['tips+dan+trik', 'bar', 'nama', 'ada', 'canva', 'librari', 'mysql', 'orang', 'dan', 'chart', 'tutori', 'php', 'pie', 'cara', 'bubl', 'lain'];
+	window._wp_rp_promoted_content = true;
+</script>
+<link rel="stylesheet" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/vertical.css">
+    <script type="text/javascript">
+        var ajaxurl = 'https://belajarphp.net/wp-admin/admin-ajax.php';
+    </script>
+	<link rel="shortcut icon" type="image/x-icon" href="https://belajarphp.net/wp-content/themes/masterstudy/favicon.ico">
+<meta name="generator" content="Powered by WPBakery Page Builder - drag and drop page builder for WordPress.">
+<!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="https://belajarphp.net/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]--><link rel="amphtml" href="https://belajarphp.net/membuat-grafik-dengan-php-mysql-chartjs/amp/"><meta name="generator" content="Powered by Slider Revolution 5.4.8 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface.">
+<script type="text/javascript">function setREVStartSize(e){									
+						try{ e.c=jQuery(e.c);var i=jQuery(window).width(),t=9999,r=0,n=0,l=0,f=0,s=0,h=0;
+							if(e.responsiveLevels&&(jQuery.each(e.responsiveLevels,function(e,f){f>i&&(t=r=f,l=e),i>f&&f>r&&(r=f,n=e)}),t>r&&(l=n)),f=e.gridheight[l]||e.gridheight[0]||e.gridheight,s=e.gridwidth[l]||e.gridwidth[0]||e.gridwidth,h=i/s,h=h>1?1:h,f=Math.round(h*f),"fullscreen"==e.sliderLayout){var u=(e.c.width(),jQuery(window).height());if(void 0!=e.fullScreenOffsetContainer){var c=e.fullScreenOffsetContainer.split(",");if (c) jQuery.each(c,function(e,i){u=jQuery(i).length>0?u-jQuery(i).outerHeight(!0):u}),e.fullScreenOffset.split("%").length>1&&void 0!=e.fullScreenOffset&&e.fullScreenOffset.length>0?u-=jQuery(window).height()*parseInt(e.fullScreenOffset,0)/100:void 0!=e.fullScreenOffset&&e.fullScreenOffset.length>0&&(u-=parseInt(e.fullScreenOffset,0))}f=u}else void 0!=e.minHeight&&f<e.minHeight&&(f=e.minHeight);e.c.closest(".rev_slider_wrapper").css({height:f})					
+						}catch(d){console.log("Failure at Presize of Slider:"+d)}						
+					};</script>
+		<style type="text/css" id="wp-custom-css">
+			p
+{
+	font-size:16px;
+}
+ol li a,ol li
+{
+	font-size:16px;
+}		</style>
+	<style type="text/css" title="dynamic-css" class="options-output">.logo-unit .logo{font-family:Montserrat;color:#fff;font-size:23px;}.header_top_bar, .header_top_bar a{font-family:Montserrat;font-weight:400;font-style:normal;color:#ffffff;font-size:12px;}
+body.skin_custom_color .post_list_main_section_wrapper .post_list_meta_unit .sticky_post,
+body.skin_custom_color .overflowed_content .wpb_column .icon_box,
+body.skin_custom_color .stm_countdown_bg,
+body.skin_custom_color #searchform-mobile .search-wrapper .search-submit,
+body.skin_custom_color .header-menu-mobile .header-menu > li .arrow.active,
+body.skin_custom_color .header-menu-mobile .header-menu > li.opened > a,
+body.skin_custom_color mark,
+body.skin_custom_color .woocommerce .cart-totals_wrap .shipping-calculator-button:hover,
+body.skin_custom_color .detailed_rating .detail_rating_unit tr td.bar .full_bar .bar_filler,
+body.skin_custom_color .product_status.new,
+body.skin_custom_color .stm_woo_helpbar .woocommerce-product-search input[type="submit"],
+body.skin_custom_color .stm_archive_product_inner_unit .stm_archive_product_inner_unit_centered .stm_featured_product_price .price.price_free,
+body.skin_custom_color .sidebar-area .widget:after,
+body.skin_custom_color .sidebar-area .socials_widget_wrapper .widget_socials li .back a,
+body.skin_custom_color .socials_widget_wrapper .widget_socials li .back a,
+body.skin_custom_color .widget_categories ul li a:hover:after,
+body.skin_custom_color .event_date_info_table .event_btn .btn-default,
+body.skin_custom_color .course_table tr td.stm_badge .badge_unit.quiz,
+body.skin_custom_color div.multiseparator:after,
+body.skin_custom_color .page-links span:hover,
+body.skin_custom_color .page-links span:after,
+body.skin_custom_color .page-links > span:after,
+body.skin_custom_color .page-links > span,
+body.skin_custom_color .stm_post_unit:after,
+body.skin_custom_color .blog_layout_grid .post_list_content_unit:after,
+body.skin_custom_color ul.page-numbers > li a.page-numbers:after,
+body.skin_custom_color ul.page-numbers > li span.page-numbers:after,
+body.skin_custom_color ul.page-numbers > li a.page-numbers:hover,
+body.skin_custom_color ul.page-numbers > li span.page-numbers:hover,
+body.skin_custom_color ul.page-numbers > li a.page-numbers.current:after,
+body.skin_custom_color ul.page-numbers > li span.page-numbers.current:after,
+body.skin_custom_color ul.page-numbers > li a.page-numbers.current,
+body.skin_custom_color ul.page-numbers > li span.page-numbers.current,
+body.skin_custom_color .triangled_colored_separator,
+body.skin_custom_color .magic_line,
+body.skin_custom_color .navbar-toggle .icon-bar,
+body.skin_custom_color .navbar-toggle:hover .icon-bar,
+body.skin_custom_color #searchform .search-submit,
+body.skin_custom_color .header_main_menu_wrapper .header-menu > li > ul.sub-menu:before,
+body.skin_custom_color .search-toggler:after,
+body.skin_custom_color .modal .popup_title,
+body.skin_custom_color .widget_pages ul.style_2 li a:hover:after,
+body.skin_custom_color .sticky_post,
+body.skin_custom_color .btn-carousel-control:after,
+.primary_bg_color,
+.mbc,
+.stm_lms_courses_carousel_wrapper .owl-dots .owl-dot.active,
+.stm_lms_courses_carousel__term.active,
+body.course_hub .header_default.header_2,
+.triangled_colored_separator:before,
+.triangled_colored_separator:after,
+body.skin_custom_color.udemy .btn-default,
+body.skin_custom_color.udemy .nav.nav-tabs>li.active a
+{background-color:#eab830;}
+body.skin_custom_color ul.page-numbers > li a.page-numbers:hover,
+body.skin_custom_color ul.page-numbers > li a.page-numbers.current,
+body.skin_custom_color ul.page-numbers > li span.page-numbers.current,
+body.skin_custom_color .custom-border textarea:active, 
+body.skin_custom_color .custom-border input[type=text]:active, 
+body.skin_custom_color .custom-border input[type=email]:active, 
+body.skin_custom_color .custom-border input[type=number]:active, 
+body.skin_custom_color .custom-border input[type=password]:active, 
+body.skin_custom_color .custom-border input[type=tel]:active,
+body.skin_custom_color .custom-border .form-control:active,
+body.skin_custom_color .custom-border textarea:focus, 
+body.skin_custom_color .custom-border input[type=text]:focus, 
+body.skin_custom_color .custom-border input[type=email]:focus, 
+body.skin_custom_color .custom-border input[type=number]:focus, 
+body.skin_custom_color .custom-border input[type=password]:focus, 
+body.skin_custom_color .custom-border input[type=tel]:focus,
+body.skin_custom_color .custom-border .form-control:focus,
+body.skin_custom_color .icon-btn:hover .icon_in_btn,
+body.skin_custom_color .icon-btn:hover,
+body.skin_custom_color .average_rating_unit,
+body.skin_custom_color blockquote,
+body.skin_custom_color .tp-caption .icon-btn:hover .icon_in_btn,
+body.skin_custom_color .tp-caption .icon-btn:hover,
+body.skin_custom_color .stm_theme_wpb_video_wrapper .stm_video_preview:after,
+body.skin_custom_color .btn-carousel-control,
+body.skin_custom_color .post_list_main_section_wrapper .post_list_meta_unit .post_list_comment_num,
+body.skin_custom_color .post_list_main_section_wrapper .post_list_meta_unit,
+body.skin_custom_color .search-toggler:hover,
+body.skin_custom_color .search-toggler,
+.stm_lms_courses_carousel_wrapper .owl-dots .owl-dot.active,
+.triangled_colored_separator .triangle:before
+{border-color:#eab830;}
+body.skin_custom_color .icon-btn:hover .icon_in_btn,
+body.skin_custom_color .icon-btn:hover .link-title,
+body.skin_custom_color .stats_counter .h1,
+body.skin_custom_color .event_date_info .event_date_info_unit .event_labels,
+body.skin_custom_color .event-col .event_archive_item .event_location i,
+body.skin_custom_color .event-col .event_archive_item .event_start i,
+body.skin_custom_color .gallery_terms_list li.active a,
+body.skin_custom_color .tp-caption .icon-btn:hover .icon_in_btn,
+body.skin_custom_color .widget_pages ul.style_2 li a:hover .h6,
+body.skin_custom_color .teacher_single_product_page>a:hover .title,
+body.skin_custom_color .sidebar-area .widget ul li a:hover:after,
+body.skin_custom_color div.pp_woocommerce .pp_gallery ul li a:hover,
+body.skin_custom_color div.pp_woocommerce .pp_gallery ul li.selected a,
+body.skin_custom_color .single_product_after_title .meta-unit.teacher:hover .value,
+body.skin_custom_color .single_product_after_title .meta-unit i,
+body.skin_custom_color .single_product_after_title .meta-unit .value a:hover,
+body.skin_custom_color .woocommerce-breadcrumb a:hover,
+body.skin_custom_color #footer_copyright .copyright_text a:hover,
+body.skin_custom_color .widget_stm_recent_posts .widget_media .cats_w a:hover,
+body.skin_custom_color .widget_pages ul.style_2 li a:hover,
+body.skin_custom_color .sidebar-area .widget_categories ul li a:hover,
+body.skin_custom_color .sidebar-area .widget ul li a:hover,
+body.skin_custom_color .widget_categories ul li a:hover,
+body.skin_custom_color .stm_product_list_widget li a:hover .title,
+body.skin_custom_color .widget_contacts ul li .text a:hover,
+body.skin_custom_color .sidebar-area .widget_pages ul.style_1 li a:focus .h6,
+body.skin_custom_color .sidebar-area .widget_nav_menu ul.style_1 li a:focus .h6,
+body.skin_custom_color .sidebar-area .widget_pages ul.style_1 li a:focus,
+body.skin_custom_color .sidebar-area .widget_nav_menu ul.style_1 li a:focus,
+body.skin_custom_color .sidebar-area .widget_pages ul.style_1 li a:active .h6,
+body.skin_custom_color .sidebar-area .widget_nav_menu ul.style_1 li a:active .h6,
+body.skin_custom_color .sidebar-area .widget_pages ul.style_1 li a:active,
+body.skin_custom_color .sidebar-area .widget_nav_menu ul.style_1 li a:active,
+body.skin_custom_color .sidebar-area .widget_pages ul.style_1 li a:hover .h6,
+body.skin_custom_color .sidebar-area .widget_nav_menu ul.style_1 li a:hover .h6,
+body.skin_custom_color .sidebar-area .widget_pages ul.style_1 li a:hover,
+body.skin_custom_color .sidebar-area .widget_nav_menu ul.style_1 li a:hover,
+body.skin_custom_color .widget_pages ul.style_1 li a:focus .h6,
+body.skin_custom_color .widget_nav_menu ul.style_1 li a:focus .h6,
+body.skin_custom_color .widget_pages ul.style_1 li a:focus,
+body.skin_custom_color .widget_nav_menu ul.style_1 li a:focus,
+body.skin_custom_color .widget_pages ul.style_1 li a:active .h6,
+body.skin_custom_color .widget_nav_menu ul.style_1 li a:active .h6,
+body.skin_custom_color .widget_pages ul.style_1 li a:active,
+body.skin_custom_color .widget_nav_menu ul.style_1 li a:active,
+body.skin_custom_color .widget_pages ul.style_1 li a:hover .h6,
+body.skin_custom_color .widget_nav_menu ul.style_1 li a:hover .h6,
+body.skin_custom_color .widget_pages ul.style_1 li a:hover,
+body.skin_custom_color .widget_nav_menu ul.style_1 li a:hover,
+body.skin_custom_color .see_more a:after,
+body.skin_custom_color .see_more a,
+body.skin_custom_color .transparent_header_off .header_main_menu_wrapper ul > li > ul.sub-menu > li a:hover,
+body.skin_custom_color .stm_breadcrumbs_unit .navxtBreads > span a:hover,
+body.skin_custom_color .btn-carousel-control,
+body.skin_custom_color .post_list_main_section_wrapper .post_list_meta_unit .post_list_comment_num,
+body.skin_custom_color .post_list_main_section_wrapper .post_list_meta_unit .date-m,
+body.skin_custom_color .post_list_main_section_wrapper .post_list_meta_unit .date-d,
+body.skin_custom_color .stats_counter h1,
+body.skin_custom_color .yellow,
+body.skin_custom_color ol li a:hover,
+body.skin_custom_color ul li a:hover,
+body.skin_custom_color .search-toggler,
+.primary_color,
+.mtc_h:hover,
+body.classic_lms .header_top_bar .header_top_bar_socs ul li a:hover,
+body.classic_lms .header_top_bar a:hover,
+#footer .widget_stm_lms_popular_courses ul li a:hover .meta .h5.title,
+body.classic_lms .stm_lms_wishlist_button a:hover i,
+.classic_lms .post_list_main_section_wrapper .post_list_item_title:hover
+{color:#eab830;}
+body.skin_custom_color .triangled_colored_separator .triangle,
+body.skin_custom_color .magic_line:after
+{border-bottom-color:#eab830;}
+body.skin_custom_color .blog_layout_grid .post_list_meta_unit .sticky_post,
+body.skin_custom_color .blog_layout_list .post_list_meta_unit .sticky_post,
+body.skin_custom_color .product_status.special,
+body.skin_custom_color .view_type_switcher a:hover,
+body.skin_custom_color .view_type_switcher a.view_list.active_list,
+body.skin_custom_color .view_type_switcher a.view_grid.active_grid,
+body.skin_custom_color .stm_archive_product_inner_unit .stm_archive_product_inner_unit_centered .stm_featured_product_price .price,
+body.skin_custom_color .sidebar-area .widget_text .btn,
+body.skin_custom_color .stm_product_list_widget.widget_woo_stm_style_2 li a .meta .stm_featured_product_price .price,
+body.skin_custom_color .widget_tag_cloud .tagcloud a:hover,
+body.skin_custom_color .sidebar-area .widget ul li a:after,
+body.skin_custom_color .sidebar-area .socials_widget_wrapper .widget_socials li a,
+body.skin_custom_color .socials_widget_wrapper .widget_socials li a,
+body.skin_custom_color .gallery_single_view .gallery_img a:after,
+body.skin_custom_color .course_table tr td.stm_badge .badge_unit,
+body.skin_custom_color .widget_mailchimp .stm_mailchimp_unit .button,
+body.skin_custom_color .textwidget .btn:active,
+body.skin_custom_color .textwidget .btn:focus,
+body.skin_custom_color .form-submit .submit:active,
+body.skin_custom_color .form-submit .submit:focus,
+body.skin_custom_color .button:focus,
+body.skin_custom_color .button:active,
+body.skin_custom_color .btn-default:active,
+body.skin_custom_color .btn-default:focus,
+body.skin_custom_color .button:hover,
+body.skin_custom_color .textwidget .btn:hover,
+body.skin_custom_color .form-submit .submit,
+body.skin_custom_color .button,
+body.skin_custom_color .btn-default,
+.btn.btn-default:hover, .button:hover, .textwidget .btn:hover,
+body.skin_custom_color .short_separator,
+.sbc,
+.sbc_h:hover,
+.wpb-js-composer .vc_general.vc_tta.vc_tta-tabs.vc_tta-style-classic li.vc_tta-tab>a,
+.wpb-js-composer .vc_general.vc_tta.vc_tta-tabs.vc_tta-style-classic li.vc_tta-tab>a:hover,
+#header.transparent_header .header_2 .stm_lms_account_dropdown .dropdown button,
+.stm_lms_courses_categories.style_3 .stm_lms_courses_category>a:hover,
+.stm_lms_udemy_course .nav.nav-tabs>li a,
+body.classic_lms .classic_style .nav.nav-tabs>li.active a,
+.sbc:hover
+{background-color:#2c75e4;}
+body.skin_custom_color .wpb_tabs .form-control:focus,
+body.skin_custom_color .wpb_tabs .form-control:active,
+body.skin_custom_color .woocommerce .cart-totals_wrap .shipping-calculator-button,
+body.skin_custom_color .sidebar-area .widget_text .btn,
+body.skin_custom_color .widget_tag_cloud .tagcloud a:hover,
+body.skin_custom_color .icon_box.dark a:hover,
+body.skin_custom_color .simple-carousel-bullets a.selected,
+body.skin_custom_color .stm_sign_up_form .form-control:active,
+body.skin_custom_color .stm_sign_up_form .form-control:focus,
+body.skin_custom_color .form-submit .submit,
+body.skin_custom_color .button,
+body.skin_custom_color .btn-default,
+.sbrc,
+.sbrc_h:hover,
+.vc_general.vc_tta.vc_tta-tabs,
+body.skin_custom_color .blog_layout_grid .post_list_meta_unit,
+body.skin_custom_color .blog_layout_grid .post_list_meta_unit .post_list_comment_num,
+body.skin_custom_color .blog_layout_list .post_list_meta_unit .post_list_comment_num,
+body.skin_custom_color .blog_layout_list .post_list_meta_unit,
+#header.transparent_header .header_2 .stm_lms_account_dropdown .dropdown button
+{border-color:#2c75e4;}
+.header_2_top_bar__inner .top_bar_right_part .header_top_bar_socs ul li a:hover,
+.secondary_color,
+body.skin_custom_color .icon_box .icon_text>h3>span,
+body.skin_custom_color .stm_woo_archive_view_type_list .stm_featured_product_stock i,
+body.skin_custom_color .stm_woo_archive_view_type_list .expert_unit_link:hover .expert,
+body.skin_custom_color .stm_archive_product_inner_unit .stm_archive_product_inner_unit_centered .stm_featured_product_body a .title:hover,
+body.skin_custom_color .stm_product_list_widget.widget_woo_stm_style_2 li a:hover .title,
+body.skin_custom_color .blog_layout_grid .post_list_meta_unit .post_list_comment_num,
+body.skin_custom_color .blog_layout_grid .post_list_meta_unit .date-m,
+body.skin_custom_color .blog_layout_grid .post_list_meta_unit .date-d,
+body.skin_custom_color .blog_layout_list .post_list_meta_unit .post_list_comment_num,
+body.skin_custom_color .blog_layout_list .post_list_meta_unit .date-m,
+body.skin_custom_color .blog_layout_list .post_list_meta_unit .date-d,
+body.skin_custom_color .widget_stm_recent_posts .widget_media a:hover .h6,
+body.skin_custom_color .widget_product_search .woocommerce-product-search:after,
+body.skin_custom_color .widget_search .search-form > label:after,
+body.skin_custom_color .sidebar-area .widget ul li a,
+body.skin_custom_color .sidebar-area .widget_categories ul li a,
+body.skin_custom_color .widget_contacts ul li .text a,
+body.skin_custom_color .event-col .event_archive_item > a:hover .title,
+body.skin_custom_color .stm_contact_row a:hover,
+body.skin_custom_color .comments-area .commentmetadata i,
+body.skin_custom_color .stm_post_info .stm_post_details .comments_num .post_comments:hover,
+body.skin_custom_color .stm_post_info .stm_post_details .comments_num .post_comments i,
+body.skin_custom_color .stm_post_info .stm_post_details .post_meta li a:hover span,
+body.skin_custom_color .stm_post_info .stm_post_details .post_meta li i,
+body.skin_custom_color .blog_layout_list .post_list_item_tags .post_list_divider,
+body.skin_custom_color .blog_layout_list .post_list_item_tags a,
+body.skin_custom_color .blog_layout_list .post_list_cats .post_list_divider,
+body.skin_custom_color .blog_layout_list .post_list_cats a,
+body.skin_custom_color .blog_layout_list .post_list_item_title a:hover,
+body.skin_custom_color .blog_layout_grid .post_list_item_tags .post_list_divider,
+body.skin_custom_color .blog_layout_grid .post_list_item_tags a,
+body.skin_custom_color .blog_layout_grid .post_list_cats .post_list_divider,
+body.skin_custom_color .blog_layout_grid .post_list_cats a,
+body.skin_custom_color .blog_layout_grid .post_list_item_title:focus,
+body.skin_custom_color .blog_layout_grid .post_list_item_title:active,
+body.skin_custom_color .blog_layout_grid .post_list_item_title:hover,
+body.skin_custom_color .stm_featured_products_unit .stm_featured_product_single_unit .stm_featured_product_single_unit_centered .stm_featured_product_body a .title:hover,
+body.skin_custom_color .icon_box.dark a:hover,
+body.skin_custom_color .post_list_main_section_wrapper .post_list_item_tags .post_list_divider,
+body.skin_custom_color .post_list_main_section_wrapper .post_list_item_tags a,
+body.skin_custom_color .post_list_main_section_wrapper .post_list_cats .post_list_divider,
+body.skin_custom_color .post_list_main_section_wrapper .post_list_cats a,
+body.skin_custom_color .post_list_main_section_wrapper .post_list_item_title:active,
+body.skin_custom_color .post_list_main_section_wrapper .post_list_item_title:focus,
+body.skin_custom_color .post_list_main_section_wrapper .post_list_item_title:hover,
+body.skin_custom_color a:hover,
+.secondary_color,
+#header.transparent_header .header_2 .header_top .stm_lms_categories .heading_font, 
+#header.transparent_header .header_2 .header_top .stm_lms_categories i,
+.classic_lms .post_list_main_section_wrapper .post_list_cats a,
+.classic_lms .post_list_main_section_wrapper .post_list_item_tags a,
+.stm_lms_courses__single__inner .stm_lms_courses__single--info_title a:hover h4
+{color:#2c75e4;}a{color:#2c75e4;}body, .normal_font{font-family:"Open Sans";color:#273044;font-size:14px;}.btn{font-family:Montserrat;line-height:14px;font-size:14px;}.header-menu{font-family:Montserrat;font-weight:normal;color:#fff;}h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6,.nav-tabs>li>a,.heading_font,table,.widget_categories ul li a,.sidebar-area .widget ul li a,.select2-selection__rendered,blockquote,.select2-chosen,.vc_tta-tabs.vc_tta-tabs-position-top .vc_tta-tabs-container .vc_tta-tabs-list li.vc_tta-tab a,.vc_tta-tabs.vc_tta-tabs-position-left .vc_tta-tabs-container .vc_tta-tabs-list li.vc_tta-tab a{font-family:Montserrat;color:#273044;}h1,.h1{line-height:55px;letter-spacing:-0.4px;font-weight:700;font-size:50px;}h2,.h2{line-height:38px;font-weight:700;font-size:36px;}h3,.h3{line-height:34px;font-weight:600;font-size:24px;}h4,.h4,blockquote{line-height:26px;font-weight:400;font-size:16px;}h5,.h5,.select2-selection__rendered{line-height:20px;font-weight:600;font-size:14px;}h6,.h6,.widget_pages ul li a, .widget_nav_menu ul li a, .footer_menu li a,.widget_categories ul li a,.sidebar-area .widget ul li a{line-height:12px;font-weight:400;font-size:12px;}#footer_top{background-color:#414b4f;}#footer_bottom{background-color:#273044;}#footer_bottom .widget_title h3{font-weight:700;color:#ffffff;font-size:18px;}#footer_bottom, .widget_contacts ul li .text, 
+				.footer_widgets_wrapper .widget ul li a,
+				.widget_nav_menu ul.style_1 li a .h6, 
+				.widget_pages ul.style_2 li a .h6,
+				#footer .stm_product_list_widget.widget_woo_stm_style_2 li a .meta .title,
+				.widget_pages ul.style_1 li a .h6{color:#ffffff;}.widget_pages ul.style_2 li a:after{background-color:#ffffff;}</style><noscript><style type="text/css"> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>	<meta name="google-site-verification" content="DQTfEHX8ddSK-vmajGXB-Zgpl0mRfK0VVC0igs0viIc">
+<link rel="stylesheet" type="text/css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/buttons-secure.css"><script async="" type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/count.js.download"></script><script type="text/javascript" async="" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/embed.js.download"></script><script src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/count-data.js.download"></script><link rel="preload" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.9974049bf7b0591e5d4f055cb67f3ee3.css"><link rel="preload" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.880980e048a2432334f13013030456ac.js"><link rel="preload" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.4180262f1aa52e0f0340aac9fc52a8d8.js"><link rel="preload" as="script" href="https://disqus.com/next/config.js"><iframe id="stSegmentFrame" name="stSegmentFrame" frameborder="0" scrolling="no" width="0px" height="0px" sandbox="allow-scripts allow-same-origin" style="display:none;" __idm_frm__="558" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/saved_resource(6).html"></iframe><style type="text/css">.fancybox-margin{margin-right:17px;}</style><script src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/alfalfa_min.d078e4f2a4721192a99e02601a767617.js.download" async="" charset="UTF-8"></script></head>
+<body class="post-template-default single single-post postid-2742 single-format-standard stm_lms_button skin_custom_color classic_lms wpb-js-composer js-comp-ver-5.5.5 vc_responsive" ontouchstart="" style="padding-bottom: 379px;">
+
+    
+	<div id="wrapper">
+
+		
+        
+<div id="header" class="transparent_header_off" data-color="">
+
+			<div class="header_top_bar" style="background-color:#2c75e4">
+    <div class="container">
+        <div class="clearfix">
+			                
+	<div class="pull-left">
+		<ul class="top_bar_info clearfix">
+			<li class="hidden-info">English</li>
+		</ul>
+	</div>
+			
+            <!-- Header Top bar Login -->
+			
+            <!-- Header top bar Socials -->
+			
+				<div class="pull-right xs-pull-left">
+		<ul class="top_bar_info clearfix">
+							<li class="hidden-info">
+                    <i class="far fa-clock"></i> Mon - Sat 8.00 - 18.00				</li>
+										<li class="hidden-info">
+                    <i class="fa fa-map-marker-alt"></i> Komplek Villa CIlame Indah Blok B16, Ngamprah, Bandung Barat				</li>
+										<li class="hidden-info">
+                    <i class="fa fa-phone"></i> WA / Telpon : +6289699935552                </li>
+					</ul>
+	</div>
+
+
+        </div>
+    </div>
+</div>	
+	
+    <div class="header_default header_default">
+		<div class="container">
+    <div class="row">
+	    <div class="col-md-3 col-sm-12 col-xs-12">
+		    <div class="logo-unit">
+                	<a href="https://belajarphp.net/">
+		<img class="img-responsive logo_transparent_static visible" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/logo-1.png" style="width: 253px;" alt="Belajarphp">
+			</a>
+		    </div>
+		    
+	        <!-- Navbar toggle MOBILE -->
+		    <button type="button" class="navbar-toggle collapsed hidden-lg hidden-md" data-toggle="collapse" data-target="#header_menu_toggler">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+	    </div> <!-- md-3 -->
+	    
+
+	    <!-- MObile menu -->
+	    <div class="col-xs-12 col-sm-12 visible-xs visible-sm">
+		    <div class="collapse navbar-collapse header-menu-mobile" id="header_menu_toggler">
+			    <ul class="header-menu clearfix">
+				    <li id="menu-item-4625" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-4625"><a href="https://belajarphp.net/">Home</a><div class="magic_line" style="max-width: 0px;"></div></li>
+<li id="menu-item-940" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-940"><a href="https://belajarphp.net/courses/">Courses</a><span class="arrow"><i class="fa fa-angle-right"></i></span>
+<ul class="sub-menu">
+	<li id="menu-item-8991" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8991"><a href="https://belajarphp.net/stm_lms_course_category/web-desain/">DVD Tutorial Web Desain</a></li>
+	<li id="menu-item-8988" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8988"><a href="https://belajarphp.net/stm_lms_course_category/php-dan-mysql/">DVD Tutorial PHP MySQL</a></li>
+	<li id="menu-item-8989" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8989"><a href="https://belajarphp.net/stm_lms_course_category/codeigniter/">DVD Tutorial Codeigniter</a></li>
+	<li id="menu-item-8996" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8996"><a href="https://belajarphp.net/stm_lms_course_category/laravel/">DVD Tutorial Laravel</a></li>
+	<li id="menu-item-8835" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8835"><a href="https://belajarphp.net/stm_lms_course_category/android/">DVD Tutorial Android</a></li>
+	<li id="menu-item-8992" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8992"><a href="https://belajarphp.net/stm_lms_course_category/wordpress/">DVD Tutorial WordPress</a></li>
+	<li id="menu-item-8990" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8990"><a href="https://belajarphp.net/stm_lms_course_category/desain-grafis/">Desain Grafis &amp; Animasi</a></li>
+	<li id="menu-item-9251" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9251"><a href="https://belajarphp.net/stm_lms_course_category/node-js-dan-javascript/">Java Script Dan Node JS</a></li>
+	<li id="menu-item-10301" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-10301"><a href="https://belajarphp.net/stm_lms_course_category/database/">DVD tutorial Database &amp; Aplikasi Dekstop</a></li>
+</ul>
+<div class="magic_line" style="max-width: 0px;"></div></li>
+<li id="menu-item-4626" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4626"><a href="https://belajarphp.net/events/">Training</a><div class="magic_line" style="max-width: 0px;"></div></li>
+<li id="menu-item-4627" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-4627"><a href="https://belajarphp.net/blog/">Artikel</a><span class="arrow"><i class="fa fa-angle-right"></i></span>
+<ul class="sub-menu">
+	<li id="menu-item-4634" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4634"><a href="https://belajarphp.net/belajar-html-dan-css/">Tutorial HTML Dan CSS</a></li>
+	<li id="menu-item-4635" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4635"><a href="https://belajarphp.net/belajar-tutorial-php-mysql/">Tutorial PHP MySQL</a></li>
+	<li id="menu-item-4636" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4636"><a href="https://belajarphp.net/belajar-framework-codeigniter/">Tutorial Codeigniter</a></li>
+	<li id="menu-item-4637" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4637"><a href="https://belajarphp.net/belajar-laravel/">Tutorial Laravel</a></li>
+	<li id="menu-item-4638" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4638"><a href="https://belajarphp.net/membuat-grafik-dengan-php-mysql-chartjs/#">Source Code Gratis</a></li>
+</ul>
+<div class="magic_line" style="max-width: 0px;"></div></li>
+<li id="menu-item-4650" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4650"><a href="https://belajarphp.net/bukti-pengiriman">Resi Pengiriman Paket</a><div class="magic_line" style="max-width: 0px;"></div></li>
+<li id="menu-item-9362" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9362"><a href="https://belajarphp.net/testimoni-dari-pembeli/">Testimoni</a><div class="magic_line" style="max-width: 0px;"></div></li>
+                    <li>
+                    	<form role="search" method="get" id="searchform-mobile" action="https://belajarphp.net/">
+						    <div class="search-wrapper">
+						        <input placeholder="Search..." type="text" class="form-control search-input" value="" name="s">
+						        <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
+						    </div>
+						</form>
+                    <div class="magic_line" style="max-width: 0px;"></div></li>
+			    </ul>
+		    </div>
+	    </div>
+	    
+	    <!-- Desktop menu -->
+	    <div class="col-md-8 col-md-offset-1 col-sm-9 col-sm-offset-0 hidden-xs hidden-sm">
+			
+<div class="stm_menu_toggler" data-text="Menu"></div>
+<div class="header_main_menu_wrapper clearfix" style="margin-top:5px;">
+    <div class="pull-right hidden-xs right_buttons">
+        		    
+<div class="stm_lms_wishlist_button" data-container="body" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Wishlist">
+    <a href="https://belajarphp.net/lms-wishlist" data-text="Favorites">
+        <i class="far fa-bookmark mtc_h"></i>
+    </a>
+</div>                <div class="search-toggler-unit">
+            <div class="search-toggler" data-toggle="modal" data-target="#searchModal"><i class="fa fa-search"></i></div>
+        </div>
+    </div>
+
+    <div class="collapse navbar-collapse pull-right">
+        <ul class="header-menu clearfix">
+			<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-4625"><a href="https://belajarphp.net/">Home</a><div class="magic_line" style="max-width: 46px;"></div></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-940"><a href="https://belajarphp.net/courses/">Courses</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8991"><a href="https://belajarphp.net/stm_lms_course_category/web-desain/">DVD Tutorial Web Desain</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8988"><a href="https://belajarphp.net/stm_lms_course_category/php-dan-mysql/">DVD Tutorial PHP MySQL</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8989"><a href="https://belajarphp.net/stm_lms_course_category/codeigniter/">DVD Tutorial Codeigniter</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8996"><a href="https://belajarphp.net/stm_lms_course_category/laravel/">DVD Tutorial Laravel</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8835"><a href="https://belajarphp.net/stm_lms_course_category/android/">DVD Tutorial Android</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8992"><a href="https://belajarphp.net/stm_lms_course_category/wordpress/">DVD Tutorial WordPress</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8990"><a href="https://belajarphp.net/stm_lms_course_category/desain-grafis/">Desain Grafis &amp; Animasi</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9251"><a href="https://belajarphp.net/stm_lms_course_category/node-js-dan-javascript/">Java Script Dan Node JS</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-10301"><a href="https://belajarphp.net/stm_lms_course_category/database/">DVD tutorial Database &amp; Aplikasi Dekstop</a></li>
+</ul>
+<div class="magic_line" style="max-width: 70px;"></div></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4626"><a href="https://belajarphp.net/events/">Training</a><div class="magic_line" style="max-width: 73px;"></div></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-4627"><a href="https://belajarphp.net/blog/">Artikel</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4634"><a href="https://belajarphp.net/belajar-html-dan-css/">Tutorial HTML Dan CSS</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4635"><a href="https://belajarphp.net/belajar-tutorial-php-mysql/">Tutorial PHP MySQL</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4636"><a href="https://belajarphp.net/belajar-framework-codeigniter/">Tutorial Codeigniter</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4637"><a href="https://belajarphp.net/belajar-laravel/">Tutorial Laravel</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4638"><a href="https://belajarphp.net/membuat-grafik-dengan-php-mysql-chartjs/#">Source Code Gratis</a></li>
+</ul>
+<div class="magic_line" style="max-width: 62px;"></div></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4650"><a href="https://belajarphp.net/bukti-pengiriman">Resi Pengiriman Paket</a><div class="magic_line" style="max-width: 186px;"></div></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9362"><a href="https://belajarphp.net/testimoni-dari-pembeli/">Testimoni</a><div class="magic_line" style="max-width: 82px;"></div></li>
+        </ul>
+    </div>
+
+</div>	    </div><!-- md-8 desk menu -->
+	    
+    </div> <!-- row -->
+</div> <!-- container -->    </div>
+</div> <!-- id header -->
+		<div id="main">    <div class="stm_single_post">
+		
+
+
+
+
+		<!-- Title -->
+	
+	        <div class="entry-header clearfix" style="">
+            <div class="container">
+				                <div class="entry-title-left">
+                    <div class="entry-title">
+						                            <h2 class="h1" style="">Blog</h2>
+																		                    </div>
+                </div>
+                <div class="entry-title-right">
+										                </div>
+				            </div>
+        </div>
+	
+<!-- Breads -->
+<div class="stm_lms_breadcrumbs stm_lms_breadcrumbs__header_default">
+                            <div class="stm_breadcrumbs_unit">
+                    <div class="container">
+                        <div class="navxtBreads">
+                            <!-- Breadcrumb NavXT 6.2.1 -->
+<span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to Belajarphp." href="https://belajarphp.net/" class="home"><span property="name">Belajarphp</span></a><meta property="position" content="1"></span> &gt; <span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to Blog." href="https://belajarphp.net/blog/" class="post-root post post-post"><span property="name">Blog</span></a><meta property="position" content="2"></span> &gt; <span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to the Tips Dan Trik category archives." href="https://belajarphp.net/category/tips-dan-trik/" class="taxonomy category"><span property="name">Tips Dan Trik</span></a><meta property="position" content="3"></span> &gt; <span class="post post-post current-item">Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS</span>                        </div>
+                    </div>
+                </div>
+                </div>
+	<div class="container blog_main_layout_grid">
+		
+    	<div class="row"><div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">    		<div class="blog_layout_list sidebar_position_right">
+	    		<div class="stm_post_unit">
+				    <div class="stm_post_info">
+						<h1 class="h2 post_title">Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS</h1>
+						<div class="stm_post_details clearfix">
+							<ul class="clearfix post_meta">
+								<li class="post_date h6"><i class="far fa-clock"></i><span>October 28, 2016</span></li>
+								<li class="post_by h6"><i class="fa fa-user"></i>Posted by: <span>Nuris Akbar</span></li>
+																									<li class="post_cat h6"><i class="fa fa-flag"></i>
+										Category:																					<a href="https://belajarphp.net/category/tips-dan-trik/"><span>Tips Dan Trik</span></a>
+																			</li>
+															</ul>
+							<div class="comments_num">
+								<a href="https://belajarphp.net/membuat-grafik-dengan-php-mysql-chartjs/#disqus_thread" class="post_comments h6" data-disqus-identifier="2742 https://belajarphp.net/?p=2742">0 Comments</a>
+							</div>
+						</div>
+																				<div class="post_thumbnail">
+								<img width="750" height="422" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/587500_675d_2-1.jpg" class="img-responsive wp-post-image" alt="" srcset="https://belajarphp.net/wp-content/uploads/2016/10/587500_675d_2-1.jpg 750w, https://belajarphp.net/wp-content/uploads/2016/10/587500_675d_2-1-300x169.jpg 300w, https://belajarphp.net/wp-content/uploads/2016/10/587500_675d_2-1-270x153.jpg 270w" sizes="(max-width: 750px) 100vw, 750px">							</div>
+											</div>
+											<div class="text_block clearfix">
+							<p style="text-align: justify;">ChartJS adalah salah satu library yang memanfaatkan element canvas untuk membuat grafik yang akan ditampilkan melalui web browser, kita bisa memanfaatkan library ChartJS untuk menampilkan informasi laporan dalam bentuk grafik sehingga lebih mudah dipahami oleh orang lain dari pada menampilkan data dalam bentuk tabel. ChartJS sendiri mendukung 6 jenis chart sebagai berikut :</p>
+<h3 style="text-align: justify;">Tipe 1 – Line Chart<br>
+<a href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/chartJS-line-chart.png" rel="attachment wp-att-2745"><img class="alignnone size-full wp-image-2745" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/chartJS-line-chart.png" alt="ChartJS Line Chart" width="974" height="474"></a></h3>
+<h3 style="text-align: justify;">Tipe 2 &nbsp;– Bar Chart<br>
+<a href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/chartJS-bar-chart-1.png" rel="attachment wp-att-2749"><img class="alignnone size-full wp-image-2749" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/chartJS-bar-chart-1.png" alt="ChartJS Bar Chart" width="946" height="472"></a></h3>
+<h3>Type 3 – Radar Chart</h3>
+<p><a href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/chartJs-radar-chart.png" rel="attachment wp-att-2752"><img class="alignnone size-full wp-image-2752" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/chartJs-radar-chart.png" alt="chartJS radar chart" width="887" height="460"></a></p>
+<h3>Type 4 – Polar Area Chart</h3>
+<p><a href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/chartsJs-pola-area-chart.png" rel="attachment wp-att-2753"><img class="alignnone size-full wp-image-2753" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/chartsJs-pola-area-chart.png" alt="Polar Area Chart" width="810" height="462"></a></p>
+<h3>Type 5 – Pie Dan Dognut Chart<br>
+<a href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/chartjs-pie-dognut-charts.png" rel="attachment wp-att-2754"><img class="alignnone size-full wp-image-2754" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/chartjs-pie-dognut-charts.png" alt="chartjs-pie-dognut-charts" width="876" height="254"></a></h3>
+<h3>Type 6 – Buble Charts<a href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/buble-charts.png" rel="attachment wp-att-2756"><img class="alignnone size-full wp-image-2756" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/buble-charts.png" alt="Buble Charts" width="965" height="483"></a></h3>
+<h3>Membuat Folder Dan File Latihan</h3>
+<p>sekarang buatlah sebuah folder baru dengan nama charts pada folder&nbsp;C:\xampp\htdocs, kemudian buatlah sebuah file baru dengan nama index.php dan simpan di dalam folder chartjs. ada 2 cara untuk memanggil library ChartJS. Cara pertama adalah mengdownload ChartJS Secara Manual dan ikuti langkah langkah berikut :</p>
+<ol>
+<li>download &nbsp;library ChartJS &nbsp;<a href="https://github.com/chartjs/Chart.js/releases/download/v2.3.0/Chart.js.zip" target="_blank" rel="noopener">chartjs.org</a></li>
+<li>extrack file Chart.js.zip ke folder C:\xampp\htdocs\chartjs</li>
+<li>Kemudian buka lagi file index.php dan tulis script ini :</li>
+</ol>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5cab0c62cc849938561317" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 14px !important; line-height: 16px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 14px !important; height: 21px !important; line-height: 21px !important; margin-top: -21px; display: none; position: absolute; z-index: 2;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 14px !important;height: 21px !important; line-height: 21px !important;"><span class="crayon-mixed-highlight" title="Contains Mixed Languages"></span><div class="crayon-button crayon-nums-button crayon-pressed" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 19.6px !important; line-height: 19.6px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 14px !important; line-height: 16px !important; z-index: 0; opacity: 0; overflow: hidden;">&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Belajarphp.net - ChartJS&lt;/title&gt;
+        &lt;script src="Chart.bundle.js"&gt;&lt;/script&gt;
+        &lt;style type="text/css"&gt;
+            .container {
+                width: 50%;
+                margin: 15px auto;
+            }
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="container"&gt;
+            &lt;canvas id="myChart" width="100" height="100"&gt;&lt;/canvas&gt;
+        &lt;/div&gt;
+        &lt;script&gt;
+            var ctx = document.getElementById("myChart");
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                    datasets: [{
+                            label: '# of Votes',
+                            data: [12, 19, 3, 5, 2, 3],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    }
+                }
+            });
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 14px !important; line-height: 16px !important;"><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-2">2</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-4">4</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-6">6</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-8">8</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-10">10</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-12">12</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-14">14</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-16">16</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-18">18</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-20">20</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-21">21</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-22">22</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-23">23</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-24">24</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-25">25</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-26">26</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-27">27</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-28">28</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-29">29</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-30">30</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-31">31</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-32">32</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-33">33</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-34">34</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-35">35</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-36">36</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-37">37</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-38">38</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-39">39</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-40">40</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-41">41</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-42">42</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-43">43</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-44">44</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-45">45</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-46">46</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-47">47</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-48">48</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-49">49</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-50">50</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-51">51</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-52">52</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-53">53</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-54">54</div><div class="crayon-num" data-line="crayon-5cab0c62cc849938561317-55">55</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc849938561317-56">56</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 14px !important; line-height: 16px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5cab0c62cc849938561317-1"><span class="crayon-o">&lt;</span><span class="crayon-v">html</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-v">head</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-v">title</span><span class="crayon-o">&gt;</span><span class="crayon-v">Belajarphp</span><span class="crayon-sy">.</span><span class="crayon-v">net</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-h"> </span><span class="crayon-e">ChartJS</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-e">title</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-ta">&lt;script </span><span class="crayon-e ">src</span><span class="crayon-o">=</span><span class="crayon-s">"Chart.bundle.js"</span><span class="crayon-o">&gt;</span><span class="crayon-ta">&lt;/script&gt;</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-ta">&lt;style </span><span class="crayon-e ">type</span><span class="crayon-k ">="text/css"&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-6"><span class="crayon-k ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.container </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e ">width</span><span class="crayon-sy">:</span><span class="crayon-h"> </span><span class="crayon-i ">50%</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e ">margin</span><span class="crayon-sy">:</span><span class="crayon-h"> </span><span class="crayon-i ">15px</span><span class="crayon-h"> </span><span class="crayon-i ">auto</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-ta">&lt;/style&gt;</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-v">head</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-v">body</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-e">div </span><span class="crayon-t">class</span><span class="crayon-o">=</span><span class="crayon-s">"container"</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-e">canvas </span><span class="crayon-v">id</span><span class="crayon-o">=</span><span class="crayon-s">"myChart"</span><span class="crayon-h"> </span><span class="crayon-v">width</span><span class="crayon-o">=</span><span class="crayon-s">"100"</span><span class="crayon-h"> </span><span class="crayon-v">height</span><span class="crayon-o">=</span><span class="crayon-s">"100"</span><span class="crayon-o">&gt;</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-e">canvas</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-e">div</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-16"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-ta">&lt;script&gt;</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-17"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">var</span><span class="crayon-h"> </span><span class="crayon-v">ctx</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">document</span><span class="crayon-sy">.</span><span class="crayon-e">getElementById</span><span class="crayon-sy">(</span><span class="crayon-s">"myChart"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-18"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">var</span><span class="crayon-h"> </span><span class="crayon-v">myChart</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-e">Chart</span><span class="crayon-sy">(</span><span class="crayon-v">ctx</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-19"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">type</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">'bar'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-20"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">data</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-21"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">labels</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-s">"Red"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"Blue"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"Yellow"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"Green"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"Purple"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"Orange"</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-22"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">datasets</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-23"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">label</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">'# of Votes'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-24"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">data</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-cn">12</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">19</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">5</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-25"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">backgroundColor</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">[</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-26"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(255, 99, 132, 0.2)'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-27"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(54, 162, 235, 0.2)'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-28"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(255, 206, 86, 0.2)'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-29"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(75, 192, 192, 0.2)'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-30"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(153, 102, 255, 0.2)'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-31"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(255, 159, 64, 0.2)'</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-32"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-33"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">borderColor</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">[</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-34"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(255,99,132,1)'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-35"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(54, 162, 235, 1)'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-36"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(255, 206, 86, 1)'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-37"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(75, 192, 192, 1)'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-38"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(153, 102, 255, 1)'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-39"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(255, 159, 64, 1)'</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-40"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-41"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">borderWidth</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">1</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-42"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-43"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-44"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">options</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-45"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">scales</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-46"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">yAxes</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-47"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">ticks</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-48"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">beginAtZero</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">true</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-49"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-50"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-51"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-52"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-53"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-54"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-ta">&lt;/script&gt;</span></div><div class="crayon-line" id="crayon-5cab0c62cc849938561317-55"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-v">body</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc849938561317-56"><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-v">html</span><span class="crayon-o">&gt;</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0205 seconds] -->
+<p></p>
+<p style="text-align: justify;">Cara kedua kita bisa menggunakan CDN sehingga kita tidak perlu mengdownload library ChartJS secara manual, hal ini tentu lebih mudah dan performance nya jadi lebih cepat. sehingga implementasi nya anda bisa mengganti script index.php pada line 4 menjadi seperti ini :</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5cab0c62cc86d096960379" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 14px !important; line-height: 16px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 14px !important; height: 21px !important; line-height: 21px !important; margin-top: -21px; display: none; z-index: 4;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 14px !important;height: 21px !important; line-height: 21px !important;"><span class="crayon-mixed-highlight" title="Contains Mixed Languages"></span><div class="crayon-button crayon-nums-button crayon-pressed" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 19.6px !important; line-height: 19.6px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 14px !important; line-height: 16px !important; z-index: 0; opacity: 0; overflow: hidden;">&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js"&gt;&lt;/script&gt;</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 14px !important; line-height: 16px !important;"><div class="crayon-num" data-line="crayon-5cab0c62cc86d096960379-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 14px !important; line-height: 16px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5cab0c62cc86d096960379-1"><span class="crayon-ta">&lt;script </span><span class="crayon-e ">src</span><span class="crayon-o">=</span><span class="crayon-s">"https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js"</span><span class="crayon-o">&gt;</span><span class="crayon-ta">&lt;/script&gt;</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<h3>Uji Coba Hasil Generate ChartJS</h3>
+<p style="text-align: justify;">sekarang waktunya melakukan ujicoba untuk melihat hasilnya, silahkan buka web browser anda dan masukan alamat&nbsp;http://localhost/chartjs/ pada address bar web browser.<br>
+<a href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/chartJS-tutorial.png" rel="attachment wp-att-2744"><img class="alignnone size-full wp-image-2744" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/chartJS-tutorial.png" alt="chartjs-tutorial" width="839" height="521"></a></p>
+<h3>Membuat Data Dinamis Dari Database MySQL</h3>
+<p style="text-align: justify;">sekarang kita akan membuat sebuah tabel dengan nama penjualan yang akan digunakan untuk menyimpan informasi hasil penjualan sebuah perusahaan, berikut field field nya :</p>
+<p><a href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/Screenshot_8-1.png" rel="attachment wp-att-2759"><img class="alignnone size-large wp-image-2759" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/Screenshot_8-1.png" alt="screenshot_8" width="619" height="236"></a></p>
+<p>lalu kita akan menginsert beberapa data kedalam tabel penjualan</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5cab0c62cc873854452872" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 14px !important; line-height: 16px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 14px !important; height: 21px !important; line-height: 21px !important; margin-top: -21px; display: none; position: absolute; z-index: 2;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 14px !important;height: 21px !important; line-height: 21px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 19.6px !important; line-height: 19.6px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 14px !important; line-height: 16px !important; z-index: 0; opacity: 0; overflow: hidden;">INSERT INTO `penjualan` VALUES (1,'January',2016,10);
+INSERT INTO `penjualan` VALUES (2,'February',2016,12);
+INSERT INTO `penjualan` VALUES (3,'Maret',2016,13);
+INSERT INTO `penjualan` VALUES (4,'April',2016,18);
+INSERT INTO `penjualan` VALUES (5,'May',2017,16);
+INSERT INTO `penjualan` VALUES (6,'Juni',2016,14);
+INSERT INTO `penjualan` VALUES (7,'July',2016,15);
+INSERT INTO `penjualan` VALUES (8,'Agustus',2016,12);
+INSERT INTO `penjualan` VALUES (9,'September',2016,19);
+INSERT INTO `penjualan` VALUES (10,'Oktober',2016,12);
+INSERT INTO `penjualan` VALUES (11,'November',2016,12);
+INSERT INTO `penjualan` VALUES (12,'Desember',2016,20);</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 14px !important; line-height: 16px !important;"><div class="crayon-num" data-line="crayon-5cab0c62cc873854452872-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc873854452872-2">2</div><div class="crayon-num" data-line="crayon-5cab0c62cc873854452872-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc873854452872-4">4</div><div class="crayon-num" data-line="crayon-5cab0c62cc873854452872-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc873854452872-6">6</div><div class="crayon-num" data-line="crayon-5cab0c62cc873854452872-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc873854452872-8">8</div><div class="crayon-num" data-line="crayon-5cab0c62cc873854452872-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc873854452872-10">10</div><div class="crayon-num" data-line="crayon-5cab0c62cc873854452872-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc873854452872-12">12</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 14px !important; line-height: 16px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5cab0c62cc873854452872-1"><span class="crayon-e">INSERT </span><span class="crayon-i">INTO</span><span class="crayon-h"> </span><span class="crayon-sy">`</span><span class="crayon-v">penjualan</span><span class="crayon-sy">`</span><span class="crayon-h"> </span><span class="crayon-e">VALUES</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-s">'January'</span><span class="crayon-sy">,</span><span class="crayon-cn">2016</span><span class="crayon-sy">,</span><span class="crayon-cn">10</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc873854452872-2"><span class="crayon-e">INSERT </span><span class="crayon-i">INTO</span><span class="crayon-h"> </span><span class="crayon-sy">`</span><span class="crayon-v">penjualan</span><span class="crayon-sy">`</span><span class="crayon-h"> </span><span class="crayon-e">VALUES</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">,</span><span class="crayon-s">'February'</span><span class="crayon-sy">,</span><span class="crayon-cn">2016</span><span class="crayon-sy">,</span><span class="crayon-cn">12</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5cab0c62cc873854452872-3"><span class="crayon-e">INSERT </span><span class="crayon-i">INTO</span><span class="crayon-h"> </span><span class="crayon-sy">`</span><span class="crayon-v">penjualan</span><span class="crayon-sy">`</span><span class="crayon-h"> </span><span class="crayon-e">VALUES</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-s">'Maret'</span><span class="crayon-sy">,</span><span class="crayon-cn">2016</span><span class="crayon-sy">,</span><span class="crayon-cn">13</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc873854452872-4"><span class="crayon-e">INSERT </span><span class="crayon-i">INTO</span><span class="crayon-h"> </span><span class="crayon-sy">`</span><span class="crayon-v">penjualan</span><span class="crayon-sy">`</span><span class="crayon-h"> </span><span class="crayon-e">VALUES</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-cn">4</span><span class="crayon-sy">,</span><span class="crayon-s">'April'</span><span class="crayon-sy">,</span><span class="crayon-cn">2016</span><span class="crayon-sy">,</span><span class="crayon-cn">18</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5cab0c62cc873854452872-5"><span class="crayon-e">INSERT </span><span class="crayon-i">INTO</span><span class="crayon-h"> </span><span class="crayon-sy">`</span><span class="crayon-v">penjualan</span><span class="crayon-sy">`</span><span class="crayon-h"> </span><span class="crayon-e">VALUES</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-cn">5</span><span class="crayon-sy">,</span><span class="crayon-s">'May'</span><span class="crayon-sy">,</span><span class="crayon-cn">2017</span><span class="crayon-sy">,</span><span class="crayon-cn">16</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc873854452872-6"><span class="crayon-e">INSERT </span><span class="crayon-i">INTO</span><span class="crayon-h"> </span><span class="crayon-sy">`</span><span class="crayon-v">penjualan</span><span class="crayon-sy">`</span><span class="crayon-h"> </span><span class="crayon-e">VALUES</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-cn">6</span><span class="crayon-sy">,</span><span class="crayon-s">'Juni'</span><span class="crayon-sy">,</span><span class="crayon-cn">2016</span><span class="crayon-sy">,</span><span class="crayon-cn">14</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5cab0c62cc873854452872-7"><span class="crayon-e">INSERT </span><span class="crayon-i">INTO</span><span class="crayon-h"> </span><span class="crayon-sy">`</span><span class="crayon-v">penjualan</span><span class="crayon-sy">`</span><span class="crayon-h"> </span><span class="crayon-e">VALUES</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-cn">7</span><span class="crayon-sy">,</span><span class="crayon-s">'July'</span><span class="crayon-sy">,</span><span class="crayon-cn">2016</span><span class="crayon-sy">,</span><span class="crayon-cn">15</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc873854452872-8"><span class="crayon-e">INSERT </span><span class="crayon-i">INTO</span><span class="crayon-h"> </span><span class="crayon-sy">`</span><span class="crayon-v">penjualan</span><span class="crayon-sy">`</span><span class="crayon-h"> </span><span class="crayon-e">VALUES</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-cn">8</span><span class="crayon-sy">,</span><span class="crayon-s">'Agustus'</span><span class="crayon-sy">,</span><span class="crayon-cn">2016</span><span class="crayon-sy">,</span><span class="crayon-cn">12</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5cab0c62cc873854452872-9"><span class="crayon-e">INSERT </span><span class="crayon-i">INTO</span><span class="crayon-h"> </span><span class="crayon-sy">`</span><span class="crayon-v">penjualan</span><span class="crayon-sy">`</span><span class="crayon-h"> </span><span class="crayon-e">VALUES</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-cn">9</span><span class="crayon-sy">,</span><span class="crayon-s">'September'</span><span class="crayon-sy">,</span><span class="crayon-cn">2016</span><span class="crayon-sy">,</span><span class="crayon-cn">19</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc873854452872-10"><span class="crayon-e">INSERT </span><span class="crayon-i">INTO</span><span class="crayon-h"> </span><span class="crayon-sy">`</span><span class="crayon-v">penjualan</span><span class="crayon-sy">`</span><span class="crayon-h"> </span><span class="crayon-e">VALUES</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-cn">10</span><span class="crayon-sy">,</span><span class="crayon-s">'Oktober'</span><span class="crayon-sy">,</span><span class="crayon-cn">2016</span><span class="crayon-sy">,</span><span class="crayon-cn">12</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5cab0c62cc873854452872-11"><span class="crayon-e">INSERT </span><span class="crayon-i">INTO</span><span class="crayon-h"> </span><span class="crayon-sy">`</span><span class="crayon-v">penjualan</span><span class="crayon-sy">`</span><span class="crayon-h"> </span><span class="crayon-e">VALUES</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-cn">11</span><span class="crayon-sy">,</span><span class="crayon-s">'November'</span><span class="crayon-sy">,</span><span class="crayon-cn">2016</span><span class="crayon-sy">,</span><span class="crayon-cn">12</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc873854452872-12"><span class="crayon-e">INSERT </span><span class="crayon-i">INTO</span><span class="crayon-h"> </span><span class="crayon-sy">`</span><span class="crayon-v">penjualan</span><span class="crayon-sy">`</span><span class="crayon-h"> </span><span class="crayon-e">VALUES</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-cn">12</span><span class="crayon-sy">,</span><span class="crayon-s">'Desember'</span><span class="crayon-sy">,</span><span class="crayon-cn">2016</span><span class="crayon-sy">,</span><span class="crayon-cn">20</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0032 seconds] -->
+<p>sehingga sekarang jika kita menjalankan query untuk melihat semua data yang sudah masuk maka akan muncul seperti ini :<br>
+<a href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/Screenshot_10.png" rel="attachment wp-att-2765"><img class="alignnone size-full wp-image-2765" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/Screenshot_10.png" alt="screenshot_10" width="617" height="336"></a><a href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/Screenshot_8-1.png" rel="attachment wp-att-2759"><br>
+</a>lalu kita akan modifikasi script index.php yang sebelumnya data statis akan kita ubah menjadi data dinamis berdasarkan hasil dari tabel penjualan.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5cab0c62cc890433706100" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 14px !important; line-height: 16px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 14px !important; height: 21px !important; line-height: 21px !important; margin-top: -21px; display: none; position: absolute; z-index: 2;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 14px !important;height: 21px !important; line-height: 21px !important;"><span class="crayon-mixed-highlight" title="Contains Mixed Languages"></span><div class="crayon-button crayon-nums-button crayon-pressed" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 19.6px !important; line-height: 19.6px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 14px !important; line-height: 16px !important; z-index: 0; opacity: 0; overflow: hidden;">&lt;?php
+$koneksi     = mysqli_connect("localhost", "root", "", "latihan");
+$bulan       = mysqli_query($koneksi, "SELECT bulan FROM penjualan WHERE tahun='2016' order by id asc");
+$penghasilan = mysqli_query($koneksi, "SELECT hasil_penjualan FROM penjualan WHERE tahun='2016' order by id asc");
+?&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Belajarphp.net - ChartJS&lt;/title&gt;
+        &lt;script src="Chart.bundle.js"&gt;&lt;/script&gt;
+
+        &lt;style type="text/css"&gt;
+            .container {
+                width: 50%;
+                margin: 15px auto;
+            }
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="container"&gt;
+            &lt;canvas id="myChart" width="100" height="100"&gt;&lt;/canvas&gt;
+        &lt;/div&gt;
+        &lt;script&gt;
+            var ctx = document.getElementById("myChart");
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [&lt;?php while ($b = mysqli_fetch_array($bulan)) { echo '"' . $b['bulan'] . '",';}?&gt;],
+                    datasets: [{
+                            label: '# of Votes',
+                            data: [&lt;?php while ($p = mysqli_fetch_array($penghasilan)) { echo '"' . $p['hasil_penjualan'] . '",';}?&gt;],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderWidth: 1
+                        }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    }
+                }
+            });
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 14px !important; line-height: 16px !important;"><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-2">2</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-4">4</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-6">6</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-8">8</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-10">10</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-12">12</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-14">14</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-16">16</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-18">18</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-20">20</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-21">21</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-22">22</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-23">23</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-24">24</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-25">25</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-26">26</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-27">27</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-28">28</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-29">29</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-30">30</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-31">31</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-32">32</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-33">33</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-34">34</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-35">35</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-36">36</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-37">37</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-38">38</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-39">39</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-40">40</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-41">41</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-42">42</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-43">43</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-44">44</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-45">45</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-46">46</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-47">47</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-48">48</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-49">49</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-50">50</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-51">51</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-52">52</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-53">53</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-54">54</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-55">55</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-56">56</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-57">57</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-58">58</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-59">59</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-60">60</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-61">61</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-62">62</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-63">63</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-64">64</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-65">65</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-66">66</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-67">67</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-68">68</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-69">69</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-70">70</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-71">71</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-72">72</div><div class="crayon-num" data-line="crayon-5cab0c62cc890433706100-73">73</div><div class="crayon-num crayon-striped-num" data-line="crayon-5cab0c62cc890433706100-74">74</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 14px !important; line-height: 16px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5cab0c62cc890433706100-1"><span class="crayon-ta">&lt;?php</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-2"><span class="crayon-v">$koneksi</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">mysqli_connect</span><span class="crayon-sy">(</span><span class="crayon-s">"localhost"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"root"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">""</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"latihan"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-3"><span class="crayon-v">$bulan</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">mysqli_query</span><span class="crayon-sy">(</span><span class="crayon-v">$koneksi</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"SELECT bulan FROM penjualan WHERE tahun='2016' order by id asc"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-4"><span class="crayon-v">$penghasilan</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">mysqli_query</span><span class="crayon-sy">(</span><span class="crayon-v">$koneksi</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"SELECT hasil_penjualan FROM penjualan WHERE tahun='2016' order by id asc"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-5"><span class="crayon-ta">?&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-6"><span class="crayon-o">&lt;</span><span class="crayon-v">html</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-v">head</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-v">title</span><span class="crayon-o">&gt;</span><span class="crayon-v">Belajarphp</span><span class="crayon-sy">.</span><span class="crayon-v">net</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-h"> </span><span class="crayon-e">ChartJS</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-e">title</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-ta">&lt;script </span><span class="crayon-e ">src</span><span class="crayon-o">=</span><span class="crayon-s">"Chart.bundle.js"</span><span class="crayon-o">&gt;</span><span class="crayon-ta">&lt;/script&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-10">&nbsp;</div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-ta">&lt;style </span><span class="crayon-e ">type</span><span class="crayon-k ">="text/css"&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-12"><span class="crayon-k ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.container </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e ">width</span><span class="crayon-sy">:</span><span class="crayon-h"> </span><span class="crayon-i ">50%</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e ">margin</span><span class="crayon-sy">:</span><span class="crayon-h"> </span><span class="crayon-i ">15px</span><span class="crayon-h"> </span><span class="crayon-i ">auto</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-16"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-ta">&lt;/style&gt;</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-17"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-v">head</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-18"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-v">body</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-19"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-e">div </span><span class="crayon-t">class</span><span class="crayon-o">=</span><span class="crayon-s">"container"</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-20"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-e">canvas </span><span class="crayon-v">id</span><span class="crayon-o">=</span><span class="crayon-s">"myChart"</span><span class="crayon-h"> </span><span class="crayon-v">width</span><span class="crayon-o">=</span><span class="crayon-s">"100"</span><span class="crayon-h"> </span><span class="crayon-v">height</span><span class="crayon-o">=</span><span class="crayon-s">"100"</span><span class="crayon-o">&gt;</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-e">canvas</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-21"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-e">div</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-22"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-ta">&lt;script&gt;</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-23"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">var</span><span class="crayon-h"> </span><span class="crayon-v">ctx</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">document</span><span class="crayon-sy">.</span><span class="crayon-e">getElementById</span><span class="crayon-sy">(</span><span class="crayon-s">"myChart"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-24"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">var</span><span class="crayon-h"> </span><span class="crayon-v">myChart</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-e">Chart</span><span class="crayon-sy">(</span><span class="crayon-v">ctx</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-25"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">type</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">'bar'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-26"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">data</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-27"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">labels</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-o">&lt;</span><span class="crayon-sy">?</span><span class="crayon-e">php </span><span class="crayon-st">while</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-sy">$</span><span class="crayon-v">b</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">mysqli_fetch_array</span><span class="crayon-sy">(</span><span class="crayon-sy">$</span><span class="crayon-v">bulan</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-h"> </span><span class="crayon-i">echo</span><span class="crayon-h"> </span><span class="crayon-s">'"'</span><span class="crayon-h"> </span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-sy">$</span><span class="crayon-v">b</span><span class="crayon-sy">[</span><span class="crayon-s">'bulan'</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-s">'",'</span><span class="crayon-sy">;</span><span class="crayon-sy">}</span><span class="crayon-sy">?</span><span class="crayon-o">&gt;</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-28"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">datasets</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-29"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">label</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">'# of Votes'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-30"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">data</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-o">&lt;</span><span class="crayon-sy">?</span><span class="crayon-e">php </span><span class="crayon-st">while</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-sy">$</span><span class="crayon-v">p</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">mysqli_fetch_array</span><span class="crayon-sy">(</span><span class="crayon-sy">$</span><span class="crayon-v">penghasilan</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-h"> </span><span class="crayon-i">echo</span><span class="crayon-h"> </span><span class="crayon-s">'"'</span><span class="crayon-h"> </span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-sy">$</span><span class="crayon-v">p</span><span class="crayon-sy">[</span><span class="crayon-s">'hasil_penjualan'</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-s">'",'</span><span class="crayon-sy">;</span><span class="crayon-sy">}</span><span class="crayon-sy">?</span><span class="crayon-o">&gt;</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-31"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">backgroundColor</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">[</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-32"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(255, 99, 132, 0.2)'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-33"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(54, 162, 235, 0.2)'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-34"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(255, 206, 86, 0.2)'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-35"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(75, 192, 192, 0.2)'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-36"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(153, 102, 255, 0.2)'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-37"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(255, 159, 64, 0.2)'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-38"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(255, 99, 132, 0.2)'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-39"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(54, 162, 235, 0.2)'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-40"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(255, 206, 86, 0.2)'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-41"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(75, 192, 192, 0.2)'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-42"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(153, 102, 255, 0.2)'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-43"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(255, 159, 64, 0.2)'</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-44"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-45"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">borderColor</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">[</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-46"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(255,99,132,1)'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-47"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(54, 162, 235, 1)'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-48"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(255, 206, 86, 1)'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-49"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(75, 192, 192, 1)'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-50"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(153, 102, 255, 1)'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-51"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(255, 159, 64, 1)'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-52"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(255, 99, 132, 0.2)'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-53"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(54, 162, 235, 0.2)'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-54"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(255, 206, 86, 0.2)'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-55"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(75, 192, 192, 0.2)'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-56"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(153, 102, 255, 0.2)'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-57"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">'rgba(255, 159, 64, 0.2)'</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-58"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-59"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">borderWidth</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">1</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-60"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-61"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-62"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">options</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-63"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">scales</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-64"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">yAxes</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-65"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">ticks</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-66"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">beginAtZero</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">true</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-67"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-68"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-69"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-70"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-71"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-72"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-ta">&lt;/script&gt;</span></div><div class="crayon-line" id="crayon-5cab0c62cc890433706100-73"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-v">body</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5cab0c62cc890433706100-74"><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-v">html</span><span class="crayon-o">&gt;</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0111 seconds] -->
+<p>Lalu silahkan save untuk menyimpan perubahan dan silahkan refresh web browser anda.<a href="https://belajarphp.net/wp-content/uploads/2016/10/Screenshot_9-1.png" rel="attachment wp-att-2760"><img class="alignnone size-large wp-image-2760" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/Screenshot_9-1-1024x636.png" alt="screenshot_9" width="1024" height="636"></a></p>
+<p>sekian artikel membuat grafik menggunakan bahasa pemograman PHP MySQL dan ChartJS.</p>
+						</div>
+						    		</div> <!-- stm_post_unit -->
+					
+						        
+		        <div class="row mg-bt-10">
+			        <div class="col-md-8 col-sm-8">
+				        <div class="stm_post_tags widget_tag_cloud">
+													</div>
+			        </div>
+			        <div class="col-md-4 col-sm-4">
+						<div class="pull-right xs-pull-left">
+							<div class="stm_share">
+								<label>Share:</label>
+								<span class="st_facebook_large" displaytext="" st_processed="yes"><span style="text-decoration:none;color:#000000;display:inline-block;cursor:pointer;" class="stButton"><span class="stLarge" style="background-image: url(&quot;https://ws.sharethis.com/images/2017/facebook_32.png&quot;);"></span></span></span>
+								<span class="st_twitter_large" displaytext="" st_processed="yes"><span style="text-decoration:none;color:#000000;display:inline-block;cursor:pointer;" class="stButton"><span class="stLarge" style="background-image: url(&quot;https://ws.sharethis.com/images/2017/twitter_32.png&quot;);"></span></span></span>
+								<span class="st_googleplus_large" displaytext="" st_processed="yes"><span style="text-decoration:none;color:#000000;display:inline-block;cursor:pointer;" class="stButton"><span class="stLarge" style="background-image: url(&quot;https://ws.sharethis.com/images/2017/googleplus_32.png&quot;);"></span></span></span>
+								<script type="text/javascript">var switchTo5x=true;</script>
+								<script type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/buttons.js.download"></script>
+								<script type="text/javascript">stLight.options({doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+							</div>
+						</div>
+			        </div>
+		        </div> <!-- row -->
+		        
+		        					
+		        <div class="multiseparator"></div>
+		        					<div class="stm_post_comments">
+						
+<div id="disqus_thread"><iframe id="dsq-app8317" name="dsq-app8317" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" sandbox="allow-forms allow-popups allow-same-origin allow-scripts" width="100%" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/saved_resource(7).html" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 586px !important;"></iframe><iframe id="dsq-app8314" name="dsq-app8314" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/saved_resource(8).html" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 390px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe><iframe id="dsq-app8319" name="dsq-app8319" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" sandbox="allow-forms allow-popups allow-same-origin allow-scripts" width="100%" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/saved_resource(9).html" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 623px !important;"></iframe></div>
+					</div>
+					    	</div>
+		</div>		<div class="col-lg-3 col-md-3 hidden-sm hidden-xs">			<div class="sidebar-area sidebar-area-right">
+				
+<div class="vc_row wpb_row vc_row-fluid">
+        <div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner"><div class="wpb_wrapper"><div class="wpb_widgetised_column wpb_content_element">
+		<div class="wpb_wrapper">
+			
+			<aside id="custom_html-7" class="widget_text widget widget_custom_html"><div class="widget_title"><h3>Youtube Channel</h3></div><div class="textwidget custom-html-widget"><script src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/platform.js.download" gapi_processed="true"></script>
+
+<div id="___ytsubscribe_0" style="position: absolute; width: 450px; left: -10000px;"><iframe ng-non-bindable="" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position:absolute;top:-10000px;width:450px;margin:0px;border-style:none" tabindex="0" vspace="0" width="100%" id="I0_1554713730427" name="I0_1554713730427" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/subscribe_embed.html" data-gapiattached="true" __idm_frm__="561"></iframe></div><div class="g-ytsubscribe" data-channelid="UC0Qozugp4pVTQwkgTcUdmkg" data-layout="full" data-count="default" data-gapiscan="true" data-onload="true" data-gapistub="true"></div></div></aside><aside id="categories-3" class="widget widget_categories"><div class="widget_title"><h3>Kategori Artikel</h3></div>		<ul>
+	<li class="cat-item cat-item-129"><a href="https://belajarphp.net/category/ebook-gratis/">Ebook Gratis</a>
+</li>
+	<li class="cat-item cat-item-17"><a href="https://belajarphp.net/category/hobbies/">Hobbies</a>
+</li>
+	<li class="cat-item cat-item-18"><a href="https://belajarphp.net/category/technology/">Technology</a>
+</li>
+	<li class="cat-item cat-item-133"><a href="https://belajarphp.net/category/tips-dan-trik/">Tips Dan Trik</a>
+</li>
+	<li class="cat-item cat-item-156"><a href="https://belajarphp.net/category/tutorial-ajax-jquery/">Tutorial Ajax Jquery</a>
+</li>
+	<li class="cat-item cat-item-117"><a href="https://belajarphp.net/category/codeigniter/">Tutorial Codeigniter</a>
+</li>
+	<li class="cat-item cat-item-205"><a href="https://belajarphp.net/category/tutorial-database/">Tutorial Database</a>
+</li>
+	<li class="cat-item cat-item-203"><a href="https://belajarphp.net/category/tutorial-git/">Tutorial GIT</a>
+</li>
+	<li class="cat-item cat-item-188"><a href="https://belajarphp.net/category/tutorial-html-css/">Tutorial HTML &amp; CSS</a>
+</li>
+	<li class="cat-item cat-item-121"><a href="https://belajarphp.net/category/tutorial-laravel/">Tutorial Laravel</a>
+</li>
+	<li class="cat-item cat-item-194"><a href="https://belajarphp.net/category/tutorial-mysql/">Tutorial MySQL</a>
+</li>
+	<li class="cat-item cat-item-198"><a href="https://belajarphp.net/category/tutorial-nodejs-mongodb/">Tutorial Node JS</a>
+</li>
+	<li class="cat-item cat-item-199"><a href="https://belajarphp.net/category/tutorial-php-mongodb/">Tutorial PHP MongoDB</a>
+</li>
+	<li class="cat-item cat-item-126"><a href="https://belajarphp.net/category/tutorial-php-mysql/">Tutorial PHP MYSQL</a>
+</li>
+	<li class="cat-item cat-item-206"><a href="https://belajarphp.net/category/tutorial-postgresql/">Tutorial PostgreSQL</a>
+</li>
+	<li class="cat-item cat-item-183"><a href="https://belajarphp.net/category/tutorial-sms-gateway/">Tutorial SMS Gateway</a>
+</li>
+	<li class="cat-item cat-item-200"><a href="https://belajarphp.net/category/tutorial-worpress/">Tutorial Wordpress</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://belajarphp.net/category/uncategorized/">Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-148"><a href="https://belajarphp.net/category/video-tutorial-gratis/">Video Tutorial Gratis</a>
+</li>
+	<li class="cat-item cat-item-168"><a href="https://belajarphp.net/category/web-security/">Web Security</a>
+</li>
+		</ul>
+</aside><aside id="custom_html-6" class="widget_text widget widget_custom_html"><div class="widget_title"><h3>Top Sales Tutorial</h3></div><div class="textwidget custom-html-widget"><marquee direction="left">
+
+<a href="https://belajarphp.net/courses/membangun-sistem-informasi-akademik-dengan-laravel-mysql-dan-ajax/" target="new">
+<img src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/1282848_85b8e7be-a7f1-4cb0-a62a-9deb29918837_566_583.png" width="200">
+	</a>
+
+<a href="https://belajarphp.net/courses/membangun-website-sekolah-professional-dengan-cms-wordpress/" target="new">
+<img src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/1282848_28758396-63e9-4452-910a-af08ccb682c2_648_580.png" width="200">
+	</a>
+	
+	<a href="https://belajarphp.net/courses/membangun-sistem-informasi-akademik-sekolah-dengan-codeigniter-dan-ajax/" target="new">
+<img src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/135117876_8f7203ae-fc0c-4d52-8c68-992554d08f9c_590_564.png" width="200">
+	</a>
+	</marquee></div></aside><aside id="custom_html-9" class="widget_text widget widget_custom_html"><div class="widget_title"><h3>Telegram Member Channel</h3></div><div class="textwidget custom-html-widget"><a href="https://t.me/belajarphpdotnet" target="new"><img src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/telegram-member-channel.jpg"></a></div></aside><aside id="custom_html-2" class="widget_text widget widget_custom_html"><div class="widget_title"><h3>Konsultasi Gratis</h3></div><div class="textwidget custom-html-widget"><a href="https://api.whatsapp.com/send?phone=+6289699935552&amp;text=Mas%20Nuris,%20Saya%20Ingin%20Bisa%20Pemograman%20PHP" target="new">
+<img src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/banner-konsultasi-gratis-1.jpg">
+</a> </div></aside><aside id="custom_html-4" class="widget_text widget widget_custom_html"><div class="widget_title"><h3>Download Sekarang</h3></div><div class="textwidget custom-html-widget"><a href="https://buku-laravel-vue.com/laravelvuejs" target="new">
+<img src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/banner-400.png">
+</a>
+</div></aside>
+		</div>
+	</div>
+</div></div></div></div>
+
+				
+			</div>
+		
+		</div></div>		
+	
+<div class="wp_rp_wrap  wp_rp_vertical" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">Artikel Menarik Yang Lain</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-2582" data-post-type="none"><a href="https://belajarphp.net/multiple-upload-codeigniter-dropzonejs/" class="wp_rp_thumbnail"><img src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/Screenshot_12-1-150x150.png" alt="Cara Multiple Upload Dengan Codeigniter Dan DropzoneJS" width="150" height="150"></a><a href="https://belajarphp.net/multiple-upload-codeigniter-dropzonejs/" class="wp_rp_title">Cara Multiple Upload Dengan Codeigniter Dan DropzoneJS</a></li><li data-position="1" data-poid="in-2492" data-post-type="none"><a href="https://belajarphp.net/tutorial-setting-git-windows/" class="wp_rp_thumbnail"><img src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/221696_d05a_4-1-150x150.jpg" alt="Tutorial Lengkap Setting Git Pada OS Windows" width="150" height="150"></a><a href="https://belajarphp.net/tutorial-setting-git-windows/" class="wp_rp_title">Tutorial Lengkap Setting Git Pada OS Windows</a></li><li data-position="2" data-poid="in-11367" data-post-type="none"><a href="https://belajarphp.net/tutorial-cara-membuat-koneksi-php-dan-postgreesql/" class="wp_rp_thumbnail"><img src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/koneksi-php-postgree-cover-150x150.jpg" alt="Tutorial Cara Membuat Koneksi PHP Dan PostgreeSQL" width="150" height="150"></a><a href="https://belajarphp.net/tutorial-cara-membuat-koneksi-php-dan-postgreesql/" class="wp_rp_title">Tutorial Cara Membuat Koneksi PHP Dan PostgreeSQL</a></li><li data-position="3" data-poid="in-2539" data-post-type="none"><a href="https://belajarphp.net/upload-multiplefile-dropzonejs-php/" class="wp_rp_thumbnail"><img src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/dropzoneJS-php-1-150x150.jpg" alt="Cara Upload Multiple File Dengan DropzoneJS Dan PHP" width="150" height="150"></a><a href="https://belajarphp.net/upload-multiplefile-dropzonejs-php/" class="wp_rp_title">Cara Upload Multiple File Dengan DropzoneJS Dan PHP</a></li><li data-position="4" data-poid="in-3587" data-post-type="none"><a href="https://belajarphp.net/cetak-data-langsung-ke-printer-php/" class="wp_rp_thumbnail"><img src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/510644_5a9a_2-1-150x150.jpg" alt="Cetak Data Secara Langsung Ke Printer Dengan PHP" width="150" height="150"></a><a href="https://belajarphp.net/cetak-data-langsung-ke-printer-php/" class="wp_rp_title">Cetak Data Secara Langsung Ke Printer Dengan PHP</a></li></ul></div></div>
+
+	</div>
+	
+		
+    </div>
+			</div> <!--#main-->
+		</div><iframe frameborder="0" allowtransparency="true" scrolling="no" name="__privateStripeMetricsController0" allowpaymentrequest="true" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/outer.html" aria-hidden="true" tabindex="-1" style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important;"></iframe><iframe src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/portal.html" id="st_gdpr_iframe" style="width: 0px; height: 0px; position: absolute; left: -5000px;"></iframe> <!--#wrapper-->
+		<footer id="footer">
+			<div class="footer_wrapper tessssssst">
+								
+        <div id="footer_bottom">
+            <div class="footer_widgets_wrapper kek text-upper">
+                <div class="container">
+                    <div class="widgets cols_4 clearfix">
+						<aside id="stm_text-2" class="widget stm_wp_widget_text"><div class="widget_title"><h3>Tentang Kami</h3></div>        <div class="textwidget"><p align="justify"><b>Belajarphp.net</b> adalah website yang menyediakan materi dan layanan belajar secara online dan offline.</p>
+<p><a href="https://www.bukalapak.com/u/nuris_akbar" target="new"><br>
+<img src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/logo-bukalapak.png"><br>
+</a></p>
+</div>
+
+		</aside><aside id="custom_html-3" class="widget_text widget widget_custom_html"><div class="widget_title"><h3>Link Marketplace</h3></div><div class="textwidget custom-html-widget"><a href="https://www.tokopedia.com/tutorialpemogram" target="new">
+<img src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/logo-tokopedia.png" height="40px">
+</a>
+<a href="https://shopee.co.id/nurisakbar" target="new">
+<img src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/logo-shopee.jpg" height="40px">
+</a></div></aside><aside id="fblbx" class="widget widget_cardoza_fb_like"><div class="widget_title"><h3>FIND US ON FACEBOOK</h3></div>	<div class="fb-page" style="border:1px solid #" data-adapt-container-width="true" ;="" data-height="" data-href="https://www.facebook.com/belajarweblengkap/?locale=" fr_fr""="" data-small-header="false" data-hide-cover="" data-show-facepile="true" data-show-posts="false">
+	
+	
+	
+		
+		
+</div>
+<div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+  
+    </aside><aside id="contacts-2" class="widget widget_contacts"><div class="widget_title"><h3>Hubungi Kami</h3></div><ul class="widget_contacts_style_1"><li class="widget_contacts_address"><div class="icon"><i class="fa-icon-stm_icon_pin"></i></div><div class="text">Komplek Villa Cilame Indah Blok B16, Kecamatan Ngamprah, Kabupaten Bandung Barat, Jawa Barat</div></li><li class="widget_contacts_phone"><div class="icon"><i class="fa-icon-stm_icon_phone"></i></div><div class="text">WA : +6289699935552</div></li><li class="widget_contacts_fax"><div class="icon"><i class="fa-icon-stm_icon_fax"></i></div><div class="text">Telp : +6285315990012</div></li><li class="widget_contacts_email"><div class="icon"><i class="fa fa-envelope"></i></div><div class="text"><a href="mailto:nuris.akbar@gmail.com">nuris.akbar@gmail.com</a></div></li></ul></aside>                    </div>
+                </div>
+            </div>
+        </div>
+
+					
+			</div>
+		</footer>
+
+		
+		<!-- Searchform -->
+		<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		
+			<div class="modal-body heading_font">
+				<div class="search-title">Search</div>
+				<form role="search" method="get" id="searchform" action="https://belajarphp.net/">
+				    <div class="search-wrapper">
+				        <input placeholder="Start typing here..." type="text" class="form-control search-input" value="" name="s" id="s">
+				        <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
+				    </div>
+				</form>
+			</div>
+		
+		</div>
+	</div>
+</div>
+		<script type="text/javascript">
+			var cf7_custom_image = 'https://belajarphp.net/wp-content/themes/masterstudy/assets/img/';
+			var daysStr = 'Days';
+			var hoursStr = 'Hours';
+			var minutesStr = 'Minutes';
+			var secondsStr = 'Seconds';
+		</script>
+
+		
+		<script>
+			var modal = document.getElementById('cfblb_modal');
+		if(modal)
+		{
+				var span = document.getElementsByClassName("cfblb_close")[0];
+
+				span.onclick = function() {
+					modal.style.display = "none";
+				}
+				
+				window.onclick = function(event) {
+					if (event.target == modal) {
+						modal.style.display = "none";
+					}
+				}
+		}		
+	</script>
+
+<div id="wacht-baixo">
+<a href="https://web.whatsapp.com/send?phone=+6289699935552&amp;text=Salam%20Kenal%20Mas%20Nuris,%20Saya%20Ingin%20Diskusi" onclick="gtag(&#39;event&#39;, &#39;WhatsApp&#39;, {&#39;event_action&#39;: &#39;whatsapp_chat&#39;, &#39;event_category&#39;: &#39;Chat&#39;, &#39;event_label&#39;: &#39;Chat_WhatsApp&#39;});" target="_blank">Konsultasi Via Whatapps</a></div>
+<link rel="stylesheet" id="js_composer_front-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/js_composer.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="stm-contacts_widget-css" href="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/style_1.css" type="text/css" media="all">
+<script type="text/javascript">
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"https-belajarphp-net"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/comment_count.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.17"},"disqusIdentifier":"2742 https:\/\/belajarphp.net\/?p=2742","disqusShortname":"https-belajarphp-net","disqusTitle":"Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS","disqusUrl":"https:\/\/belajarphp.net\/membuat-grafik-dengan-php-mysql-chartjs\/","postId":"2742"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/comment_embed.js.download"></script>
+<script type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/bootstrap.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var stm_gdpr_vars = {"AjaxUrl":"https:\/\/belajarphp.net\/wp-admin\/admin-ajax.php","error_prefix":"","success":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/scripts.js.download"></script>
+<script type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/jquery-migrate-1.2.1.min.js.download"></script>
+<script type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/jquery.fancybox.js.download"></script>
+<script type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/select2.full.min.js.download"></script>
+<script type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/custom.js.download"></script><iframe __idm_frm__="557" style="display: none;" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/saved_resource(10).html"></iframe>
+<script type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/ajax.submit.js.download"></script>
+<script type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/wp-embed.min.js.download"></script>
+<script type="text/javascript" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/js_composer_front.min.js.download"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-37262615-2');
+</script>
+
+	
+
+<!-- Dynamic page generated in 1.049 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2019-04-08 08:54:59 -->
+
+<!-- super cache --><div id="stcpDiv" style="position: absolute; top: -1999px; left: -1988px;">ShareThis Copy and Paste</div><div id="stwrapper" class="stwrapper stwrapper5x stwrapper5x" style="display: none;"><iframe allowtransparency="true" id="stLframe" class="stLframe" name="stLframe" frameborder="0" scrolling="no" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/index.html"></iframe></div><div id="stOverlay" onclick="javascript:stWidget.closeWidget();"></div><iframe name="oauth2relay450152246" id="oauth2relay450152246" src="./Tutorial Membuat Grafik Dengan PHP MySQL Dan ChartJS_files/postmessageRelay.html" tabindex="-1" aria-hidden="true" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe></body></html>
